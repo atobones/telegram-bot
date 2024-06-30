@@ -1,5 +1,5 @@
 const TelegramBot = require('node-telegram-bot-api');
-const moment = require('moment'); // Use moment.js for date and time manipulation
+const moment = require('moment'); 
 
 // Токен вашего бота
 const token = '';
@@ -96,7 +96,6 @@ const availableTimeSlots = {
     'Pomoc': ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00']
 };
 
-// Обработчик команды /start
 bot.onText(/\/start/, (msg) => {
     const chatId = msg.chat.id;
     const languageOptions = {
@@ -111,9 +110,9 @@ bot.onText(/\/start/, (msg) => {
 // Функция для фильтрации временных интервалов
 function filterTimeSlots(slots) {
     const currentTime = moment();
-    console.log('Current time:', currentTime.format('HH:mm')); // Debugging line
+    console.log('Current time:', currentTime.format('HH:mm')); 
     const filteredSlots = slots.filter(slot => moment(slot, 'HH:mm').isAfter(currentTime));
-    console.log('Filtered slots:', filteredSlots); // Debugging line
+    console.log('Filtered slots:', filteredSlots); 
     return filteredSlots;
 }
 
@@ -148,7 +147,7 @@ bot.on('message', (msg) => {
     else if (Object.values(texts['Русский'].buttons).includes(text) ||
              Object.values(texts['English'].buttons).includes(text) ||
              Object.values(texts['Polski'].buttons).includes(text)) {
-        const userLanguage = bookingData[chatId].language || 'Русский';  // Используем сохраненный язык или дефолтный
+        const userLanguage = bookingData[chatId].language || 'Русский'; 
         bookingData[chatId].department = text;
         
         if (employees[text]) {
@@ -171,7 +170,7 @@ bot.on('message', (msg) => {
     } 
     // Проверка, выбрал ли пользователь сотрудника
     else if (employees[bookingData[chatId].department] && employees[bookingData[chatId].department].includes(text)) {
-        const userLanguage = bookingData[chatId].language || 'Русский';  // Используем сохраненный язык или дефолтный
+        const userLanguage = bookingData[chatId].language || 'Русский';  
         bookingData[chatId].employee = text;
         
         if (availableTimeSlots[bookingData[chatId].department]) {
@@ -284,7 +283,7 @@ bot.on('message', (msg) => {
 // Обработка ошибок
 bot.on('polling_error', (error) => {
     console.error(`Polling error: ${error.code}`);
-    console.error(error); // Log the entire error object for more information
+    console.error(error); 
     if (error.response && error.response.body) {
         console.error(error.response.body);
     }
