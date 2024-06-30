@@ -6,7 +6,7 @@ const token = '';
 const bot = new TelegramBot(token, { polling: true });
 
 // Идентификатор группы для уведомлений
-const staffGroupId = '-1002203948443'; // замените на новый идентификатор супергруппы
+const staffGroupId = ''; // замените на новый идентификатор супергруппы
 
 // Тексты на разных языках
 const texts = {
